@@ -26,11 +26,12 @@ mythCuda::mythCuda()
 		}
 	}
 }
+
 int mythCuda::myth_idamax(const int N, const double *X, const int incX){
 	int ret;
 	bind(X, N, NULL, NULL, NULL, NULL);
 	cublasIdamax(handle, N, d_A, incX, &ret);
-	return ret;
+	return ret - 1;
 }
 double mythCuda::myth_sumColAbs(const int N, const double *X, const int incX){
 	double ret;
@@ -38,6 +39,7 @@ double mythCuda::myth_sumColAbs(const int N, const double *X, const int incX){
 	cublasDasum(handle, N, d_A, incX, &ret);
 	return ret;
 }
+
 bool mythCuda::HasDevice()
 {
 	int dev = findCudaDevice(0, NULL);
