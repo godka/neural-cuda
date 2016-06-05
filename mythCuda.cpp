@@ -26,7 +26,18 @@ mythCuda::mythCuda()
 		}
 	}
 }
-
+int mythCuda::myth_idamax(const int N, const double *X, const int incX){
+	int ret;
+	bind(X, N, NULL, NULL, NULL, NULL);
+	cublasIdamax(handle, N, d_A, incX, &ret);
+	return ret;
+}
+double mythCuda::myth_sumColAbs(const int N, const double *X, const int incX){
+	double ret;
+	bind(X, N, NULL, NULL, NULL, NULL);
+	cublasDasum(handle, N, d_A, incX, &ret);
+	return ret;
+}
 bool mythCuda::HasDevice()
 {
 	int dev = findCudaDevice(0, NULL);
@@ -84,7 +95,6 @@ void mythCuda::myth_dgemv(const CBLAS_TRANSPOSE TransA, const int M, const int N
 	auto status = cublasDgemv(handle, ta, M, N, &alpha, d_A, lda, d_B, incX, &beta, d_C, incY);
 	/* Read the result back */
 	status = cublasGetVector(N*incY, sizeof(double), d_C, incY, Y, incY);
-
 	if (status != CUBLAS_STATUS_SUCCESS)
 	{
 		fprintf(stderr, "!!!! device access error (read C)\n");
@@ -126,5 +136,6 @@ mythCuda::~mythCuda(){
 	cudaFree(d_A);
 	cudaFree(d_B);
 	cudaFree(d_C);
+	cublasDestroy(handle);
 	_mythcuda = NULL;
 }

@@ -12,6 +12,8 @@ public:
 	cublasHandle_t handle;
 	static mythCuda* _mythcuda;
 	mythCuda();
+	int myth_idamax(const int N, const double *X, const int incX);
+	double myth_sumColAbs(const int N, const double *X, const int incX);
 	~mythCuda();
 
 	static mythCuda* GetInstance(){

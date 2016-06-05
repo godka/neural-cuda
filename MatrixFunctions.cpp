@@ -47,12 +47,13 @@ void d_matrix::expand()
 
 int d_matrix::indexColMaxAbs(int c)
 {
-	return cblas_idamax(row, getDataPointer(0, c), 1);
+	return mythCuda::GetInstance()->myth_idamax(row, getDataPointer(0, c), 1);
+	//return cblas_idamax(row, getDataPointer(0, c), 1);
 }
 
 double d_matrix::sumColAbs(int c)
 {
-	return cblas_dasum(row, getDataPointer(0, c), 1);
+	return mythCuda::GetInstance()->myth_sumColAbs(row, getDataPointer(0, c), 1);
 }
 
 void d_matrix::initData(double v)
@@ -90,6 +91,7 @@ void d_matrix::colMultiply(double v, int c)
 
 void d_matrix::applyFunction(std::function<double(double)> f)
 {
+//#pragma omp parallel for
 	for (int i = 0; i < max_script; i++)
 	{
 		data[i] = f(data[i]);

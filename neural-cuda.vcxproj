@@ -15,7 +15,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{83829116-B2E8-4865-A03E-68CC9EB72CFB}</ProjectGuid>
-    <RootNamespace>simpleCUBLAS_vs2013</RootNamespace>
+    <RootNamespace>neural-cuda</RootNamespace>
     <ProjectName>neural-cuda</ProjectName>
     <CudaToolkitCustomDir />
   </PropertyGroup>
@@ -49,6 +49,12 @@
   <PropertyGroup Condition="'$(Platform)'=='x64'">
     <OutDir>win64/$(Configuration)/</OutDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -57,9 +63,9 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>cublas.lib;cudart_static.lib;libopenblas64.dll.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cublas.lib;cudart_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(CudaToolkitLibDir);</AdditionalLibraryDirectories>
-      <OutputFile>$(OutDir)/simpleCUBLAS.exe</OutputFile>
+      <OutputFile>$(OutDir)/neural-cuda.exe</OutputFile>
     </Link>
     <CudaCompile>
       <CodeGeneration>compute_20,compute_20;</CodeGeneration>
