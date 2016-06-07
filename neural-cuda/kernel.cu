@@ -17,7 +17,7 @@ __global__ void SigmoidKernel(double* A, double* B, int N)
 	int i = blockIdx.x*blockDim.x + threadIdx.x;
 	if (i < N)
 	{
-		B[i] = 1 / (2 + expm1(-A[i]));
+		B[i] = 1 / (1 + exp(-A[i]));
 	}
 }
 __global__ void DsigmoidKernel(double* A, double* B, int N)
@@ -25,7 +25,7 @@ __global__ void DsigmoidKernel(double* A, double* B, int N)
 	int i = blockIdx.x*blockDim.x + threadIdx.x;
 	if (i < N)
 	{
-		double a = 2 + expm1(-A[i]);
+		double a = 1 + exp(-A[i]);
 		B[i] = (a - 1) / (a*a);
 	}
 }
@@ -35,7 +35,7 @@ __global__ void ExpKernel(double* A, double* B, int N)
 	int i = blockIdx.x*blockDim.x + threadIdx.x;
 	if (i < N)
 	{
-		B[i] = expm1(A[i]) + 1;
+		B[i] = exp(A[i]) ;
 	}
 }
 
