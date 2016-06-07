@@ -60,7 +60,6 @@ cudaError_t cuda_hadamardProduct(const double *A, const double *B, double *R, un
 int cuda_dsigmoid(double *A, double *B, unsigned int size)
 {
 	int blockNum = (size + blockMax - 1) / blockMax;
-
 	DsigmoidKernel << < blockNum, blockMax >> >(A, B, size);
 	cudaError_t cudaStatus = cudaGetLastError();
 	if (cudaStatus != cudaSuccess) {
