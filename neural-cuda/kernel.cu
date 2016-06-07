@@ -49,11 +49,11 @@ cudaError_t cuda_hadamardProduct(const double *A, const double *B, double *R, un
 		fprintf(stderr, "addKernel launch failed: %s\n", cudaGetErrorString(cudaStatus));
 		return cudaStatus;
 	}
-	cudaStatus = cudaDeviceSynchronize();
-	if (cudaStatus != cudaSuccess) {
-		fprintf(stderr, "cudaDeviceSynchronize returned error code %d after launching addKernel!\n", cudaStatus);
-		return cudaStatus;
-	}
+	//cudaStatus = cudaDeviceSynchronize();
+	//if (cudaStatus != cudaSuccess) {
+	//	fprintf(stderr, "cudaDeviceSynchronize returned error code %d after launching addKernel!\n", cudaStatus);
+	//	return cudaStatus;
+	//}
 	return cudaStatus;
 }
 
@@ -67,11 +67,11 @@ int cuda_dsigmoid(double *A, double *B, unsigned int size)
 		fprintf(stderr, "addKernel launch failed: %s\n", cudaGetErrorString(cudaStatus));
 		return 1;
 	}
-	cudaStatus = cudaDeviceSynchronize();
-	if (cudaStatus != cudaSuccess) {
-		fprintf(stderr, "cudaDeviceSynchronize returned error code %d after launching addKernel!\n", cudaStatus);
-		return 1;
-	}
+	//cudaStatus = cudaDeviceSynchronize();
+	//if (cudaStatus != cudaSuccess) {
+	//	fprintf(stderr, "cudaDeviceSynchronize returned error code %d after launching addKernel!\n", cudaStatus);
+	//	return 1;
+	//}
 	return 0;
 }
 
@@ -85,11 +85,11 @@ int cuda_sigmoid(double *A, double *B, unsigned int size)
 		fprintf(stderr, "addKernel launch failed: %s\n", cudaGetErrorString(cudaStatus));
 		return 1;
 	}
-	cudaStatus = cudaDeviceSynchronize();
-	if (cudaStatus != cudaSuccess) {
-		fprintf(stderr, "cudaDeviceSynchronize returned error code %d after launching addKernel!\n", cudaStatus);
-		return 1;
-	}
+	//cudaStatus = cudaDeviceSynchronize();
+	//if (cudaStatus != cudaSuccess) {
+	//	fprintf(stderr, "cudaDeviceSynchronize returned error code %d after launching addKernel!\n", cudaStatus);
+	//	return 1;
+	//}
 	return 0;
 }
 int cuda_exp(double *A, double *B, unsigned int size)
