@@ -1,0 +1,8 @@
+LIBRARY			"neural-cuda"
+
+
+EXPORTS			cuda_hadamardProduct
+EXPORTS			cuda_sigmoid
+EXPORTS			cuda_dsigmoid
+EXPORTS			cuda_exp
+EXPORTS			cuda_test

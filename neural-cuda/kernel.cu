@@ -3,6 +3,7 @@
 #include "device_launch_parameters.h"
 #include "math_functions.hpp"
 #include <stdio.h>
+#include "neural-cuda.h"
 #define blockMax 500  
 
 __global__ void MatrixMulKernel(const double* A, const double* B, double* C, int N)
@@ -39,7 +40,7 @@ __global__ void ExpKernel(double* A, double* B, int N)
 	}
 }
 
-cudaError_t cuda_hadamardProduct(const double *A, const double *B, double *R, unsigned int size)
+HBAPI int MYTHAPI cuda_hadamardProduct(const double *A, const double *B, double *R, unsigned int size)
 {
 	int blockNum = (size + blockMax - 1) / blockMax;
 
@@ -47,17 +48,17 @@ cudaError_t cuda_hadamardProduct(const double *A, const double *B, double *R, un
 	cudaError_t cudaStatus = cudaGetLastError();
 	if (cudaStatus != cudaSuccess) {
 		fprintf(stderr, "addKernel launch failed: %s\n", cudaGetErrorString(cudaStatus));
-		return cudaStatus;
+		return 1;
 	}
 	//cudaStatus = cudaDeviceSynchronize();
 	//if (cudaStatus != cudaSuccess) {
 	//	fprintf(stderr, "cudaDeviceSynchronize returned error code %d after launching addKernel!\n", cudaStatus);
 	//	return cudaStatus;
 	//}
-	return cudaStatus;
+	return 0;
 }
 
-int cuda_dsigmoid(double *A, double *B, unsigned int size)
+HBAPI int MYTHAPI cuda_dsigmoid(double *A, double *B, unsigned int size)
 {
 	int blockNum = (size + blockMax - 1) / blockMax;
 	DsigmoidKernel << < blockNum, blockMax >> >(A, B, size);
@@ -74,7 +75,11 @@ int cuda_dsigmoid(double *A, double *B, unsigned int size)
 	return 0;
 }
 
-int cuda_sigmoid(double *A, double *B, unsigned int size)
+HBAPI int MYTHAPI  cuda_test(){
+	printf("hello cuda!\n");
+	return 0;
+}
+HBAPI int MYTHAPI cuda_sigmoid(double *A, double *B, unsigned int size)
 {
 	int blockNum = (size + blockMax - 1) / blockMax;
 
@@ -91,7 +96,7 @@ int cuda_sigmoid(double *A, double *B, unsigned int size)
 	//}
 	return 0;
 }
-int cuda_exp(double *A, double *B, unsigned int size)
+HBAPI int MYTHAPI cuda_exp(double *A, double *B, unsigned int size)
 {
 	int blockNum = (size + blockMax - 1) / blockMax;
 
