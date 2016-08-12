@@ -1,0 +1,10 @@
+*.suo
+*.db
+*.opensdf
+*.sdf
+*/Debug/
+Debug/
+*.pdb
+*/Release/
+neural-cuda/x64/Release/
+Release/

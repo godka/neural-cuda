@@ -1,7 +1,9 @@
 
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
+#define __CUDA_INTERNAL_COMPILATION__
 #include "math_functions.hpp"
+#undef __CUDA_INTERNAL_COMPILATION__
 #include <stdio.h>
 #include "neural-cuda.h"
 #define blockMax 500  
@@ -9,7 +11,7 @@
 __global__ void MatrixMulKernel(const double* A, const double* B, double* C, int N)
 {
 	int i = blockIdx.x*blockDim.x + threadIdx.x;
-	if (i<N)
+	if (i < N)
 		C[i] = A[i] * B[i];
 }
 
@@ -36,7 +38,7 @@ __global__ void ExpKernel(double* A, double* B, int N)
 	int i = blockIdx.x*blockDim.x + threadIdx.x;
 	if (i < N)
 	{
-		B[i] = exp(A[i]) ;
+		B[i] = exp(A[i]);
 	}
 }
 
