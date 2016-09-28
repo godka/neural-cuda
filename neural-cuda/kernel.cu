@@ -6,7 +6,7 @@
 #undef __CUDA_INTERNAL_COMPILATION__
 #include <stdio.h>
 #include "neural-cuda.h"
-#define blockMax 500  
+#define blockMax 1024
 __global__ void AddNumberDoubleKernel(double* dst, double* src, double v,double scale, int N)
 {
 	int i = blockIdx.x*blockDim.x + threadIdx.x;
