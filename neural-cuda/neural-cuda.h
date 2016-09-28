@@ -7,6 +7,13 @@
 #define HBAPI __declspec (dllexport)   
 #endif   
 
+HBAPI int MYTHAPI cuda_reciprocal_double(double *dst, double *src, unsigned int size, double scale);
+HBAPI int MYTHAPI cuda_reciprocal_float(float *dst, float *src, unsigned int size, float scale);
+
+HBAPI int MYTHAPI cuda_addnumber_double(double *dst, double *src, unsigned int size, double v,double scale);
+HBAPI int MYTHAPI cuda_addnumber_float(float *dst, float *src, unsigned int size, float v,float scale);
+
+HBAPI int MYTHAPI  cuda_dsigmoid(double *A, double *B, unsigned int size);
 HBAPI int MYTHAPI  cuda_hadamardProduct(const double *A, const double *B, double *R, unsigned int size);
 HBAPI int MYTHAPI  cuda_sigmoid(double *A, double *B, unsigned int size);
 HBAPI int MYTHAPI  cuda_dsigmoid(double *A, double *B, unsigned int size);
