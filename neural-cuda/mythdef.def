@@ -6,3 +6,7 @@ EXPORTS			cuda_sigmoid
 EXPORTS			cuda_dsigmoid
 EXPORTS			cuda_exp
 EXPORTS			cuda_test
+EXPORTS			cuda_addnumber_float
+EXPORTS			cuda_addnumber_double
+EXPORTS			cuda_reciprocal_float
+EXPORTS			cuda_reciprocal_double
